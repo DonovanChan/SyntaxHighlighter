@@ -4,64 +4,47 @@
  *
  * Contact:
  *   http://github.com/DonovanChan/SyntaxHighlighter
- *   or donovan@confluentstrategy.com
+ *   or donovan_c@beezwax.net
  * 
  * For use with:
  * SyntaxHighlighter
  * http://alexgorbatchev.com/
  *
  */
-SyntaxHighlighter.brushes.filemaker = function()
-{
+ ;(function()
+ {
+ 	// CommonJS
+ 	typeof(require) != 'undefined' ? SyntaxHighlighter = require('shCore').SyntaxHighlighter : null;
 
-	var funcs =	'Average Count List Max Min StDev StDevP Sum Variance VarianceP Date Day DayName DayNameJ DayOfWeek ' +
-	'DayOfYear Month MonthName MonthNameJ WeekOfYear WeekOfYearFiscal Year YearName DatabaseNames FieldBounds ' +
-	'FieldComment FieldIDs FieldNames FieldRepetitions FieldStyle FieldType GetNextSerialValue LayoutIDs ' +
-	'LayoutNames LayoutObjectNames RelationInfo ScriptIDs ScriptNames TableIDs TableNames ValueListIDs ' +
-	'ValueListItems ValueListNames WindowNames External FV NPV PMT PV Case Choose Evaluate EvaluationError ' +
-	'GetAsBoolean GetField GetFieldName GetLayoutObjectAttribute GetNthRecord If IsEmpty IsValid ' +
-	'IsValidExpression Let Lookup LookupNext Self Abs Ceiling Combination Div Exp Factorial Floor Int Lg Ln ' +
-	'Log Mod Random Round SetPrecision Sign Sqrt Truncate Extend GetRepetition Last GetSummary Char Code Exact ' +
-	'Filter FilterValues GetAsCSS GetAsDate GetAsNumber GetAsSVG GetAsText GetAsTime GetAsTimestamp GetAsURLEncoded ' +
-	'GetValue Hiragana KanaHankaku KanaZenkaku KanjiNumeral Katakana Left LeftValues LeftWords Length Lower Middle ' +
-	'MiddleValues MiddleWords NumToJText PatternCount Position Proper Quote Replace Right RightValues RightWords ' +
-	'RomanHankaku RomanZenkaku SerialIncrement Substitute Trim TrimAll Upper ValueCount WordCount RGB TextColor ' +
-	'TextColorRemove TextFont TextFontRemove TextFormatRemove TextSize TextSizeRemove TextStyleAdd TextStyleRemove ' +
-	'Hour Minute Seconds Time Timestamp Acos Asin Atan Cos Degrees Pi Radians Sin Tan Get';
-	var keywords = 'True False and or not';
-	var methods   = 'AccountName ActiveFieldContents ActiveFieldName ActiveFieldTableName ActiveLayoutObjectName ActiveModifierKeys ' +
-	'ActiveRepetitionNumber ActiveSelectionSize ActiveSelectionStart AllowAbortState AllowToolbarState ' +
-	'ApplicationLanguage ApplicationVersion CalculationRepetitionNumber CurrentDate CurrentHostTimestamp CurrentTime ' +
-	'CurrentTimestamp CustomMenuSetName DesktopPath DocumentsPath DocumentsPathListing ErrorCaptureState ' +
-	'ExtendedPrivileges FileMakerPath FileName FilePath FileSize FoundCount HighContrastColor HighContrastState ' +
-	'HostApplicationVersion HostIPAddress HostName LastError LastMessageChoice LastODBCError LayoutAccess LayoutCount ' +
-	'LayoutName LayoutNumber LayoutTableName LayoutViewState MultiUserState NetworkProtocol PageNumber PortalRowNumber ' +
-	'PreferencesPath PrinterName PrivilegeSetName RecordAccess RecordID RecordModificationCount RecordNumber ' +
-	'RecordOpenCount RecordOpenState RequestCount RequestOmitState ScreenDepth ScreenHeight ScreenWidth ScriptName ' +
-	'ScriptParameter ScriptResult SortState StatusAreaState SystemDrive SystemIPAddress SystemLanguage SystemNICAddress ' +
-	'SystemPlatform SystemVersion TemporaryPath TextRulerVisible TotalRecordCount TriggerKeystroke TriggerModifierKeys ' +
-	'UserCount UserName UseSystemFormatsState WindowContentHeight WindowContentWidth WindowDesktopHeight WindowDesktopWidth ' +
-	'WindowHeight WindowLeft WindowMode WindowName WindowTop WindowVisible WindowWidth WindowZoomLevel Roman Greek Cryllic ' +
-	'CentralEurope ShiftJIS TraditionalChinese SimplifiedChinese OEM Symbol Other Plain Bold Italic Underline Condense ' +
-	'Extend Strikethrough SmallCaps Superscript Subscript Uppercase Lowercase Titlecase WordUnderline DoubleUnderline ' +
-	'AllStyles objectType hasFocus containsFocus isFrontTabPanel bounds left right top bottom width height rotation ' +
-	'startPoint endPoint source content enclosingObject containedObjects ';
+ 	function Brush()
+ 	{
 
-	this.regexList = [
-		{ regex: SyntaxHighlighter.regexLib.singleLineCComments,				css: 'comments' },		// one line comments
-		{ regex: SyntaxHighlighter.regexLib.multiLineCComments,					css: 'comments' },		// multiline comments
-		{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,					css: 'string' },		// strings
-		{ regex: SyntaxHighlighter.regexLib.singleQuotedString,					css: 'string' },		// strings
-		{ regex: /\$\w+/g,														css: 'variable' },		// local variables
-		{ regex: /\$\$\w+/g,													css: 'variable' },		// global variables
-		{ regex: new RegExp('\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b', 'gi'),	css: 'value' },			// numbers
-		{ regex: new RegExp(this.getKeywords(funcs), 'gm'),						css: 'functions' },		// FMP functions
-		{ regex: new RegExp(this.getKeywords(keywords), 'gm'),					css: 'keyword' },		// FMP keywords
-		//{ regex: /\w+\s*=/m,													css: 'keyword' },		// FMP Let vars
-		{ regex: new RegExp(this.getKeywords(methods), 'gm'),					css: 'methods' }		// FMP fn arguments
-		];
+		var funcs =	'Case Choose Evaluate EvaluationError ExecuteSQL GetAsBoolean GetField GetFieldName GetLayoutObjectAttribute GetNthRecord If IsEmpty IsValid IsValidExpression Let Lookup LookupNext Self Location LocationValues Abs Ceiling Combination Div Exp Factorial Floor Int Lg Ln Log Mod Random Round SetPrecision Sign Sqrt Truncate Extend GetRepetition Last GetSummary Char Code Exact Filter FilterValues GetAsCSS GetAsDate GetAsNumber GetAsSVG GetAsText GetAsTime GetAsTimestamp GetAsURLEncoded GetValue Hiragana KanaHankaku KanaZenkaku KanjiNumeral Katakana Left LeftValues LeftWords Length Lower Middle MiddleValues MiddleWords NumToJText PatternCount Position Proper Quote Replace Right RightValues RightWords RomanHankaku RomanZenkaku SerialIncrement Substitute Trim TrimAll Upper ValueCount WordCount RGB TextColor TextColorRemove TextFont TextFontRemove TextFormatRemove TextSize TextSizeRemove TextStyleAdd TextStyleRemove Hour Minute Seconds Time Timestamp Acos Asin Atan Cos Degrees Pi Radians Sin Tan';
+		var keywords = 'True False and or not';
+		var methods   = 'AccountExtendedPrivileges AccountName AccountPrivilegeSetName ActiveFieldContents ActiveFieldName ActiveFieldTableName ActiveLayoutObjectName ActiveModifierKeys ActivePortalRowNumber ActiveRepetitionNumber ActiveSelectionSize ActiveSelectionStart AllowAbortState AllowFormattingBarState ApplicationLanguage ApplicationVersion CalculationRepetitionNumber ConnectionState CurrentDate CurrentExtendedPrivileges CurrentHostTimestamp CurrentPrivilegeSetName CurrentTime CurrentTimestamp CustomMenuSetName DesktopPath DocumentsPath DocumentsPathListing ErrorCaptureState FileMakerPath FileName FilePath FileSize FoundCount HighContrastColor HighContrastState HostApplicationVersion HostIPAddress HostName InstalledFMPlugins LastError LastMessageChoice LastODBCError LayoutAccess LayoutCount LayoutName LayoutNumber LayoutTableName LayoutViewState MultiUserState NetworkProtocol PageNumber PersistentID PreferencesPath PrinterName QuickFindText RecordAccess RecordID RecordModificationCount RecordNumber RecordOpenCount RecordOpenState RequestCount RequestOmitState ScreenDepth ScreenHeight ScreenWidth ScriptName ScriptParameter ScriptResult SortState StatusAreaState SystemDrive SystemIPAddress SystemLanguage SystemNICAddress SystemPlatform SystemVersion TemporaryPath TextRulerVisible TotalRecordCount TriggerCurrentTabPanel TriggerKeystroke TriggerModifierKeys TriggerTargetTabPanel UserCount UserName UseSystemFormatsState UUID WindowContentHeight WindowContentWidth WindowDesktopHeight WindowDesktopWidth WindowHeight WindowLeft WindowMode WindowName WindowStyle WindowTop WindowVisible WindowWidth WindowZoomLevel' +
+	    + 'objectType hasFocus containsFocus isFrontTabPanel bounds left right top bottom width height rotation startPoint\s?,\s?endPoint source content enclosingObject containedObjects' ;
 
-}
+		this.regexList = [
+			{ regex: SyntaxHighlighter.regexLib.singleLineCComments,				css: 'comments' },		// one line comments
+			{ regex: SyntaxHighlighter.regexLib.multiLineCComments,					css: 'comments' },		// multiline comments
+			{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,					css: 'string' },		// strings
+			{ regex: SyntaxHighlighter.regexLib.singleQuotedString,					css: 'string' },		// strings
+			{ regex: /\$\w+/g,														css: 'variable' },		// local variables
+			{ regex: /\$\$\w+/g,													css: 'variable' },		// global variables
+			{ regex: new RegExp('\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b', 'gi'),	css: 'value' },			// numbers
+			{ regex: new RegExp(this.getKeywords(funcs), 'gm'),						css: 'functions' },		// FMP functions
+			{ regex: new RegExp(this.getKeywords(keywords), 'gmi'),					css: 'keyword' },		// FMP keywords
+			//{ regex: /\w+\s*=/m,													css: 'keyword' },		// FMP Let vars
+			{ regex: new RegExp(this.getKeywords(methods), 'gmi'),					css: 'methods' }		// FMP fn arguments
+			];
 
-SyntaxHighlighter.brushes.filemaker.prototype	= new SyntaxHighlighter.Highlighter();
-SyntaxHighlighter.brushes.filemaker.aliases	= ['filemaker', 'fmp'];
+	};
+
+	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+	Brush.aliases	= ['filemaker', 'fmp'];
+
+	SyntaxHighlighter.brushes.FileMaker = Brush;
+
+	// CommonJS
+	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
+})();
